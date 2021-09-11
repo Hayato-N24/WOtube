@@ -44,15 +44,6 @@ def Index(request):
             'type': 'video',
             'order': 'viewCount'
         }
-    elif request.POST.get('submit') == 'rating':
-        search_params = {
-            'part': 'snippet',
-            'q': '筋トレ',
-            'key': settings.YOUTUBE_DATA_API_KEY,
-            'maxResults': 9,
-            'type': 'video',
-            'order': 'rating'
-        }
     else:
         search_params = {
             'part': 'snippet',
@@ -106,3 +97,6 @@ def Index(request):
     }
 
     return render(request, 'myapp/index.html', context)
+
+def About(request):
+    return render(request, 'myapp/about.html')
