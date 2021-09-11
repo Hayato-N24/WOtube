@@ -101,6 +101,6 @@ def Index(request):
 
 
 
-# 「このサイトについて」のページを表示
+# 「About」のページを表示
 def About(request):
     return render(request, 'myapp/about.html')
