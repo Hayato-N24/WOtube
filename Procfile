@@ -1,1 +1,1 @@
-web: gunicorn wotube.wsgi
+web: gunicorn WOtube.wsgi
