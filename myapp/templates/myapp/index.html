@@ -1,62 +1,47 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
-    <main class="container">
-        <div class="container my-5">
-            <div class="d-flex justify-content-center align-items-center">
-                <form method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-primary" name="submit" value="relevance" type="submit">標準</button>
-                    <button class="btn btn-primary" name="submit" value="date" type="submit">新着順</button>
-                    <button class="btn btn-primary" name="submit" value="viewCount" type="submit">再生回数順</button>
-                </form>
-            </div>
+<main class="container">
+    <!-- container-->
+    <div class="container my-5">
+        <div class="d-flex justify-content-center align-items-center">
+            <form method="POST">
+                {% csrf_token %}
+                <button class="btn btn-primary" name="submit" value="relevance" type="submit">標準</button>
+                <button class="btn btn-primary" name="submit" value="date" type="submit">新着順</button>
+                <button class="btn btn-primary" name="submit" value="viewCount" type="submit">再生回数順</button>
+            </form>
         </div>
+    </div>
+    <!-- end container-->
 
 
-        <div class="container">
-            <div class="row">
-                <!--Card deck-->
-                <!--<div class="card-deck">-->
-
-                {% for video in videos %}
-                <div class="col-lg-4">
-
-                    <!--Card-->
-                    <div class="card lg-4">
-
-                        <div class="view overlay">
-                            <img src="{{video.thumbnail}}" class="card-img-top" alt="..." />
-                        </div>
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{ video.title}}</h5>
-                            <p class="card-text">
-
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{ video.url }}" class="btn btn-primary" target="blank" rel="noopener noreferrer">再生</a>
-                                <small class="d-block text-muted float-right">{{ video.duration }}mins</small>
-
-                            </div>
-                        </div>
-
-
-
+    <!-- container-->
+    <div class="container">
+        <!--row-->
+        <div class="row">
+            {% for video in videos %}
+            <div class="col-lg-4">
+                <!--card-->
+                <div class="card lg-4">
+                    <div class="view overlay">
+                        <img src="{{video.thumbnail}}" class="card-img-top" alt="..." />
                     </div>
-                    <!--end Card-->
-
+                    <div class="card-body">
+                        <p class="card-title">{{ video.title}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ video.url }}" class="btn btn-primary" target="_blank"
+                                rel="noopener noreferrer">再生</a>
+                            <small class="d-block text-muted float-right">{{ video.duration }}mins</small>
+                        </div>
+                    </div>
                 </div>
-                <!--end col-->
-                {% endfor %}
-
-
-                <!--</div>-->
-                <!-- end Card deck-->
+                <!--end card-->
             </div>
-            <!--end row-->
-
+            {% endfor %}
         </div>
-        <!-- end container-->
+        <!--end row-->
+    </div>
+    <!-- end container-->
 
-    </main>
+</main>
 {% endblock %}

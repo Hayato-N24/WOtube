@@ -5,8 +5,6 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.views.generic import TemplateView
 
-# Create your views here.
-
 
 def Index(request):
 
@@ -52,10 +50,11 @@ def Index(request):
             'maxResults': 9,
             'type': 'video',
             'order': 'relevance'
-    }
+        }
 
     # 動画idを格納する配列
     video_ids = []
+
     # 検索リクエスト
     r = requests.get(search_url, params=search_params)
 
@@ -70,7 +69,7 @@ def Index(request):
     video_params = {
         'key': settings.YOUTUBE_DATA_API_KEY,
         'part': 'snippet,contentDetails',
-        'id': ','.join(video_ids),
+        'id': video_ids,
         'maxResults': 9
     }
 
@@ -80,9 +79,12 @@ def Index(request):
     # 取得した動画情報をjson形式で格納
     results = r.json()['items']
 
+    # 必要な動画情報を格納する配列
     videos = []
-    for result in results:
 
+    # 取得した動画情報から使用する情報のみvideo_dataにまとめ、動画一本分の情報をvideosに格納
+    # これを取得した動画本数分繰り返す
+    for result in results:
         video_data = {
             'title': result['snippet']['title'],
             'id': result['id'],
@@ -92,11 +94,15 @@ def Index(request):
         }
         videos.append(video_data)
 
+    # index.htmlに渡す形にデータを整形
     context = {
         'videos': videos
     }
 
     return render(request, 'myapp/index.html', context)
 
+
+
+# 「このサイトについて」のページを表示
 def About(request):
     return render(request, 'myapp/about.html')
