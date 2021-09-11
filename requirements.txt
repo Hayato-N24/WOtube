@@ -16,7 +16,6 @@ Babel
 backcall==0.2.0
 backports.functools-lru-cache==1.6.1
 backports.shutil-get-terminal-size==1.0.0
-backports.temp
 backports.weakref==1.0.post1
 beautifulsoup4 
 bitarray 
