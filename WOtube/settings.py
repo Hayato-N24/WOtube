@@ -126,3 +126,8 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 YOUTUBE_DATA_API_KEY = 'AIzaSyDDCv4QdYsATnU2TGHp-9LrRNDq2A8sEjE'
+
+import django_heroku
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
