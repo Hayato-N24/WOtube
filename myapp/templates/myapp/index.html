@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <!-- Start your project here-->
+    <!-- Start your project here-->
     <!-- start navber-->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -66,12 +66,15 @@
     <!-- end navber-->
 
     <main class="container">
-        <div class="container">
-            <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-                <div class="text-center">
-                    <h5 class="mb-3 display-3">My First Blog</h5>
-                    <p class="mb-3">this is my first blog</p>
-                </div>
+        <div class="container my-5">
+            <div class="d-flex justify-content-center align-items-center">
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" name="submit" value="relevance" type="submit">標準</button>
+                    <button class="btn btn-primary" name="submit" value="date" type="submit">新着順</button>
+                    <button class="btn btn-primary" name="submit" value="viewCount" type="submit">再生回数順</button>
+                    <button class="btn btn-primary" name="submit" value="rating" type="submit">評価の高い順</button>
+                </form>
             </div>
         </div>
 
@@ -81,23 +84,26 @@
                 <!--Card deck-->
                 <!--<div class="card-deck">-->
 
-
-                <div class="col-md-4">
+                {% for video in videos %}
+                <div class="col-lg-4">
 
                     <!--Card-->
-                    <div class="card mb-4">
+                    <div class="card lg-4">
 
                         <div class="view overlay">
-                            <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg" class="card-img-top"
-                                alt="..." />
+                            <img src="{{video.thumbnail}}" class="card-img-top" alt="..." />
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title">sample</h5>
+                            <h5 class="card-title">{{ video.title}}</h5>
                             <p class="card-text">
 
                             </p>
-                            <a href="#" class="btn btn-primary">もっと読む</a>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{ video.url }}" class="btn btn-primary" target="blank" rel="noopener noreferrer">再生</a>
+                                <small class="d-block text-muted float-right">{{ video.duration }}mins</small>
+
+                            </div>
                         </div>
 
 
@@ -107,6 +113,7 @@
 
                 </div>
                 <!--end col-->
+                {% endfor %}
 
 
                 <!--</div>-->
