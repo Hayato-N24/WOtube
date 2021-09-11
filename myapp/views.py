@@ -1,9 +1,7 @@
 import requests
 from isodate import parse_duration
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.conf import settings
-from django.views.generic import TemplateView
 
 
 def Index(request):
